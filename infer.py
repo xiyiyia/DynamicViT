@@ -171,7 +171,7 @@ def accuracy(output, target, topk=(1,)):
         _, pred = output.topk(maxk, 1, True, True)
         pred = pred.t()
 
-        a = (pred[0] == target.view(1, -1)[0]).nonzero().squeeze().cpu().copy()
+        a = (pred[0] == target.view(1, -1)[0]).nonzero().squeeze().cpu()
         # print(pred[0] == target.view(1, -1)[0], (pred[0] == target.view(1, -1)[0]).nonzero())
         fo = open("./result/correct_index" + str(args.base_rate) + ".txt", "a")
         fo.writelines(a.numpy())
