@@ -3,7 +3,7 @@
 import argparse
 import datetime
 import os
-
+import wandb
 import numpy as np
 import time
 import torch
@@ -32,6 +32,7 @@ from lvvit import LVViTDiffPruning
 import pickle
 
 result_index = {}
+wandb.init(project='DynamicViT')
 def get_args_parser():
     parser = argparse.ArgumentParser('DeiT training and evaluation script', add_help=False)
     parser.add_argument('--batch-size', default=128, type=int)
