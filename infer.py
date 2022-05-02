@@ -225,6 +225,8 @@ def validate(val_loader, model, criterion):
             if i % 20 == 0:
                 progress.display(i)
 
+            exit()
+
         # TODO: this should also be done with the ProgressMeter
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
               .format(top1=top1, top5=top5))
@@ -233,7 +235,7 @@ def validate(val_loader, model, criterion):
     fo.close()
     fo = open("./result/correct_index" + str(args.base_rate) + ".pickle", "rb")
     a = pickle.load(fo)
-    print(a)
+    # print(a)
     fo.close()
     return top1.avg
 
