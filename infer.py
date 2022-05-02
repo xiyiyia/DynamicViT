@@ -29,8 +29,9 @@ from functools import partial
 
 from vit import VisionTransformerDiffPruning
 from lvvit import LVViTDiffPruning
-from numpy import savetxt
+import pickle
 
+result_index = {}
 def get_args_parser():
     parser = argparse.ArgumentParser('DeiT training and evaluation script', add_help=False)
     parser.add_argument('--batch-size', default=128, type=int)
@@ -172,9 +173,10 @@ def accuracy(output, target, topk=(1,)):
         pred = pred.t()
 
         a = (pred[0] == target.view(1, -1)[0]).nonzero().squeeze().cpu()
+        result_index[len(result_index)] = a
         # print(pred[0] == target.view(1, -1)[0], (pred[0] == target.view(1, -1)[0]).nonzero())
-        # fo = open("./result/correct_index" + str(args.base_rate) + ".txt", "a")
-        savetxt("./result/correct_index" + str(args.base_rate) + ".txt", a.numpy(), delimiter=',')
+        # fo = open("./result/correct_index" + str(args.base_rate) + ".pickle", "a")
+        # savetxt("./result/correct_index" + str(args.base_rate) + ".txt", a.numpy(), delimiter=',')
         # fo.writelines(a.numpy())
         # fo.close()
 
@@ -225,7 +227,9 @@ def validate(val_loader, model, criterion):
         # TODO: this should also be done with the ProgressMeter
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
               .format(top1=top1, top5=top5))
-
+    fo = open("./result/correct_index" + str(args.base_rate) + ".pickle", "wb")
+    pickle.dump(result_index, fo, protocol=pickle.HIGHEST_PROTOCOL)
+    fo.close()
     return top1.avg
 
 if __name__ == '__main__':
