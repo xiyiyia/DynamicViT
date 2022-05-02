@@ -224,8 +224,8 @@ def validate(val_loader, model, criterion):
 
             if i % 20 == 0:
                 progress.display(i)
-
-            exit()
+            if i == 2:
+                exit()
 
         # TODO: this should also be done with the ProgressMeter
         print(' * Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'
