@@ -168,7 +168,7 @@ def accuracy(output, target, topk=(1,)):
 
         _, pred = output.topk(maxk, 1, True, True)
         pred = pred.t()
-        a = (pred[0] == target.view(1, -1)[0]).nonzero().unsqueeze(0)
+        a = (pred[0] == target.view(1, -1)[0]).nonzero().unsqueeze(-1)
         # print(pred[0] == target.view(1, -1)[0], (pred[0] == target.view(1, -1)[0]).nonzero())
         print(a)
         time.sleep(5)
