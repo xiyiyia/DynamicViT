@@ -169,9 +169,9 @@ def accuracy(output, target, topk=(1,)):
         _, pred = output.topk(maxk, 1, True, True)
         pred = pred.t()
         a = (pred[0] == target.view(1, -1)).nonzero()
-        print(a)
+        print(pred[0] == target.view(1, -1))
         print(pred[0], target.view(1, -1))
-        # time.sleep(5)
+        time.sleep(5)
         correct = pred.eq(target.view(1, -1).expand_as(pred))
 
         res = []
