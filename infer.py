@@ -230,6 +230,10 @@ def validate(val_loader, model, criterion):
     fo = open("./result/correct_index" + str(args.base_rate) + ".pickle", "wb")
     pickle.dump(result_index, fo, protocol=pickle.HIGHEST_PROTOCOL)
     fo.close()
+    fo = open("./result/correct_index" + str(args.base_rate) + ".pickle", "rb")
+    a = pickle.load(fo)
+    print(a)
+    fo.close()
     return top1.avg
 
 if __name__ == '__main__':
