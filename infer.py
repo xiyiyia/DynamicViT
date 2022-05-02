@@ -2,6 +2,8 @@
 # All rights reserved.
 import argparse
 import datetime
+import os
+
 import numpy as np
 import time
 import torch
@@ -168,10 +170,13 @@ def accuracy(output, target, topk=(1,)):
 
         _, pred = output.topk(maxk, 1, True, True)
         pred = pred.t()
+
         a = (pred[0] == target.view(1, -1)[0]).nonzero().squeeze()
         # print(pred[0] == target.view(1, -1)[0], (pred[0] == target.view(1, -1)[0]).nonzero())
-        print(a)
-        time.sleep(5)
+        fo = open("./result/correct_index" + args.base_rate + ".txt", "w+")
+        fo.writelines(a.numpy())
+        fo.close()
+
         correct = pred.eq(target.view(1, -1).expand_as(pred))
 
         res = []
