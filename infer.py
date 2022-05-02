@@ -29,7 +29,7 @@ from functools import partial
 
 from vit import VisionTransformerDiffPruning
 from lvvit import LVViTDiffPruning
-
+from numpy import savetxt
 
 def get_args_parser():
     parser = argparse.ArgumentParser('DeiT training and evaluation script', add_help=False)
@@ -173,8 +173,9 @@ def accuracy(output, target, topk=(1,)):
 
         a = (pred[0] == target.view(1, -1)[0]).nonzero().squeeze().cpu()
         # print(pred[0] == target.view(1, -1)[0], (pred[0] == target.view(1, -1)[0]).nonzero())
-        fo = open("./result/correct_index" + str(args.base_rate) + ".txt", "a")
-        fo.writelines(a.numpy())
+        # fo = open("./result/correct_index" + str(args.base_rate) + ".txt", "a")
+        savetxt("./result/correct_index" + str(args.base_rate) + ".txt", a.numpy(), delimiter=',')
+        # fo.writelines(a.numpy())
         fo.close()
 
         correct = pred.eq(target.view(1, -1).expand_as(pred))
