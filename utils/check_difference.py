@@ -96,6 +96,34 @@ print(count, total)
 
 count = 0
 total = 0
+for i in range(len(six)):
+    for _, val in enumerate(six[i]):
+        if val not in five[i]:
+            count += 1
+        total += 1
+print(count, total)
+
+
+count = 0
+total = 0
+for i in range(len(seven)):
+    for _, val in enumerate(seven[i]):
+        if val not in five[i]:
+            count += 1
+        total += 1
+print(count, total)
+
+count = 0
+total = 0
+for i in range(len(seven)):
+    for _, val in enumerate(seven[i]):
+        if val not in six[i]:
+            count += 1
+        total += 1
+print(count, total)
+
+count = 0
+total = 0
 for i in range(len(five)):
     for _, val in enumerate(five[i]):
         if val in seven[i] and val in six[i]:
