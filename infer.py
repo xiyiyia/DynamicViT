@@ -176,7 +176,7 @@ def accuracy(output, target, topk=(1,)):
         # fo = open("./result/correct_index" + str(args.base_rate) + ".txt", "a")
         savetxt("./result/correct_index" + str(args.base_rate) + ".txt", a.numpy(), delimiter=',')
         # fo.writelines(a.numpy())
-        fo.close()
+        # fo.close()
 
         correct = pred.eq(target.view(1, -1).expand_as(pred))
 
