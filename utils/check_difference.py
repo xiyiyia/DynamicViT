@@ -11,4 +11,4 @@ for i in range(len(five)):
         if val not in seven[i]:
             count += 1
         total += 1
-print(count)
+print(count,total)
