@@ -57,7 +57,7 @@ mkdir /home/datasets/imagenet
 # Extract the validation data and move images to subfolders:
 #
 # Create validation directory; move .tar file; change directory; extract validation .tar; remove compressed file
-mkdir /home/datasets/imagenet/val && mv ILSVRC2012_img_val.tar /home/datasets/imagenet/val/ && cd /home/datasets/imagenet/val && tar -xvf ILSVRC2012_img_val.tar # && rm -f ILSVRC2012_img_val.tar
+mkdir /home/datasets/imagenet/val && mv /home/datasets/ILSVRC2012_img_val.tar /home/datasets/imagenet/val/ && cd /home/datasets/imagenet/val && tar -xvf ILSVRC2012_img_val.tar # && rm -f ILSVRC2012_img_val.tar
 # get script from soumith and run; this script creates all class directories and moves images into corresponding directories
 wget -qO- https://raw.githubusercontent.com/soumith/imagenetloader.torch/master/valprep.sh | bash
 #
