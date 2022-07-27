@@ -1,18 +1,15 @@
-import math
+
 import logging
 from functools import partial
 from collections import OrderedDict
-from copy import Error, deepcopy
 import sys
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 from utils import batch_index_select
-
-from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
-from timm.models.layers import DropPath, to_2tuple, trunc_normal_
-
+from timm.models.layers import trunc_normal_
+from vit import PatchEmbed, HybridEmbed, PredictorLG, Block
 _logger = logging.getLogger(__name__)
 
 class VisionTransformerStage(nn.Module):
