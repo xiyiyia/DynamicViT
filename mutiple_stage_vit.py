@@ -21,7 +21,7 @@ class VisionTransformerStage(nn.Module):
     def __init__(self, img_size=224, patch_size=16, in_chans=3, num_classes=1000, embed_dim=768, depth=12,
                  num_heads=12, mlp_ratio=4., qkv_bias=True, qk_scale=None, representation_size=None,
                  drop_rate=0., attn_drop_rate=0., drop_path_rate=0., hybrid_backbone=None, norm_layer=None, 
-                 pruning_loc=None, token_ratio=None, distill=False):
+                 pruning_loc=None, token_ratio=None, distill=False, stage_index=0):
         """
         Args:
             img_size (int, tuple): input image size
@@ -89,11 +89,14 @@ class VisionTransformerStage(nn.Module):
 
         self.pruning_loc = pruning_loc
         self.token_ratio = token_ratio
+        self.stage_index = stage_index
+
 
         trunc_normal_(self.pos_embed, std=.02)
         trunc_normal_(self.cls_token, std=.02)
         self.apply(self._init_weights)
 
+        
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
             trunc_normal_(m.weight, std=.02)
@@ -119,7 +122,7 @@ class VisionTransformerStage(nn.Module):
         # score_list = []
         ratio_list = []
         B = x.shape[0]
-        if x.shape[1] == 224:
+        if self.stage_index == 0:
             x = self.patch_embed(x)
             cls_tokens = self.cls_token.expand(B, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
             x = torch.cat((cls_tokens, x), dim=1)
